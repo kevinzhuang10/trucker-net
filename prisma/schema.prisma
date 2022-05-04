@@ -11,9 +11,16 @@ datasource db {
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
-  phone     String  @unique
-  firstName String?
-  lastName  String?
-  bio       String?
+  id          Int          @id @default(autoincrement())
+  phone       String       @unique
+  firstName   String?
+  lastName    String?
+  bio         String?
+  agoraTokens AgoraToken[]
+}
+
+model AgoraToken {
+  id     String @id
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int
 }
